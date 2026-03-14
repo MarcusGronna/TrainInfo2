@@ -7,18 +7,18 @@ namespace Api.Controllers;
 [ApiController]
 public class TrainsController : ControllerBase
 {
-    private readonly ITrainRepository _trainRepo;
+    private readonly TrainService _trainService;
 
-    public TrainsController(ITrainRepository trainRepo)
+    public TrainsController(TrainService trainService)
     {
-        _trainRepo = trainRepo;
+        _trainService = trainService;
     }
 
     [HttpGet]
     public async Task<ActionResult<TrainResponse>> GetTrains()
     {
-        TrainResponse response = await _trainRepo.GetTrainAsync();
-        
+        TrainResponse response = await _trainService.GetTrainResponseAsync();
+
         return Ok(response);
     }
 }
