@@ -4,5 +4,5 @@ namespace Application;
 
 public interface ITrainRepository
 {
-    Task<TrainResponse> GetTrainAsync();
+    Task<Train> GetTrainAsync();
 }
