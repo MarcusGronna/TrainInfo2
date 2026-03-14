@@ -2,7 +2,7 @@
 
 namespace Application;
 
-public class TrainService
+public class TrainService : ITrainService
 {
     private readonly ITrainRepository _trainRepo;
 
@@ -15,9 +15,9 @@ public class TrainService
     {
         Train t = await _trainRepo.GetTrainAsync();
 
-        return new TrainResponse( 
-            Id : t.Id, 
-            Model : t.Model,
-            Number : t.Number);
+        return new TrainResponse(
+            Id: t.Id,
+            Model: t.Model,
+            Number: t.Number);
     }
 }
