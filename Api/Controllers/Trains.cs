@@ -7,9 +7,9 @@ namespace Api.Controllers;
 [ApiController]
 public class TrainsController : ControllerBase
 {
-    private readonly TrainService _trainService;
+    private readonly ITrainService _trainService;
 
-    public TrainsController(TrainService trainService)
+    public TrainsController(ITrainService trainService)
     {
         _trainService = trainService;
     }

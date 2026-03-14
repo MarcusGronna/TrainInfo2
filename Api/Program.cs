@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ITrainRepository,TrainRepository>();
-builder.Services.AddScoped<TrainService>();
+builder.Services.AddScoped<ITrainService, TrainService>();
 
 var app = builder.Build();
 
