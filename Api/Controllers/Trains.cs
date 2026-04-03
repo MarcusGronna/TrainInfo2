@@ -1,4 +1,5 @@
-﻿using Application;
+﻿using Application.Dtos;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

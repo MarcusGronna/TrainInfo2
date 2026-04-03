@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Application;
+namespace Application.Interfaces;
 
 public interface ITrainRepository
 {
