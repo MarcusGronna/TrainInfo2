@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain;
 
-namespace Infrastructure;
+namespace Infrastructure.Repositories;
 
 public class TrainRepository : ITrainRepository
 {
