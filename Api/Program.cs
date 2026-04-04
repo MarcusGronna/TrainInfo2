@@ -1,6 +1,6 @@
 using Application;
 using Application.Interfaces;
-using Infrastructure;
+using Infrastructure.Repositories;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
