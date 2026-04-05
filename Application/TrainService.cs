@@ -22,4 +22,9 @@ public class TrainService : ITrainService
             Model: t.Model,
             Number: t.Number);
     }
+
+    public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)
+    {
+        return await _trainRepo.CreateTrainAsync(request);
+    }
 }
