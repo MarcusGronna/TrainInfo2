@@ -1,12 +1,9 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infrastructure.DatabaseContext;
 
-internal class TrainContext : DbContext
+public class TrainContext : DbContext
 {
     public DbSet<Train> Trains { get; set; }
 
