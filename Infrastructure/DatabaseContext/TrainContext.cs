@@ -18,4 +18,9 @@ internal class TrainContext : DbContext
         var path = Environment.GetFolderPath(folder);
         DbPath = System.IO.Path.Join(path, "train.db");
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    {
+        options.UseSqlite($"Data Source={DbPath}");
+    }
 }
