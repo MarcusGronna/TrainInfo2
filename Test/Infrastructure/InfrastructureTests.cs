@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain;
-using Infrastructure;
+using Infrastructure.Repositories;
 
 namespace Tests.Infrastructure
 {
