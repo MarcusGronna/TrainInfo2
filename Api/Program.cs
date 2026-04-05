@@ -1,14 +1,17 @@
 using Application;
 using Application.Interfaces;
 using Infrastructure.Repositories;
+using Infrastructure.DatabaseContext;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+
 builder.Services.AddScoped<ITrainRepository,TrainRepository>();
 builder.Services.AddScoped<ITrainService, TrainService>();
+builder.Services.AddSingleton<TrainContext>();
 
 var app = builder.Build();
 
