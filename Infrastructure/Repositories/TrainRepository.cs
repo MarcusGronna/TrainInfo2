@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Domain;
 using Infrastructure.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -14,9 +15,9 @@ public class TrainRepository : ITrainRepository
         _db = db;
     }
 
-    public async Task<Train> GetTrainAsync()
+    public async Task<List<Train>> GetTrainsAsync()
     {
-        return new Train { Id = Guid.NewGuid(), Model = "X60", Number = "6066" };
+        return await _db.Trains.ToListAsync();
     }
 
     public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)

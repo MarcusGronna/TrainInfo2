@@ -13,14 +13,21 @@ public class TrainService : ITrainService
         _trainRepo = trainRepo;
     }
 
-    public async Task<TrainResponse> GetTrainResponseAsync()
+    public async Task<List<TrainResponse>> GetTrainsResponseAsync()
     {
-        Train t = await _trainRepo.GetTrainAsync();
+        List<Train> trains = await _trainRepo.GetTrainsAsync();
+        List<TrainResponse> response = new List<TrainResponse>();
 
-        return new TrainResponse(
+        foreach (Train t in trains)
+        {
+            response.Add(
+            new TrainResponse(
             Id: t.Id,
             Model: t.Model,
-            Number: t.Number);
+            Number: t.Number));
+        }
+
+        return response;
     }
 
     public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)

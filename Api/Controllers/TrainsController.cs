@@ -19,9 +19,9 @@ public class TrainsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<TrainResponse>> GetTrains()
+    public async Task<ActionResult<List<TrainResponse>>> GetTrains()
     {
-        TrainResponse response = await _trainService.GetTrainResponseAsync();
+        List<TrainResponse> response = await _trainService.GetTrainsResponseAsync();
 
         return Ok(response);
     }
