@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface ITrainService
     {
-        Task<TrainResponse> GetTrainResponseAsync();
+        Task<List<TrainResponse>> GetTrainsResponseAsync();
         Task<TrainResponse> CreateTrainAsync(TrainRequest request);
     }
 }

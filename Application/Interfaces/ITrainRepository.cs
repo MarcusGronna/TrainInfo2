@@ -5,6 +5,6 @@ namespace Application.Interfaces;
 
 public interface ITrainRepository
 {
-    Task<Train> GetTrainAsync();
+    Task<List<Train>> GetTrainsAsync();
     Task<TrainResponse> CreateTrainAsync(TrainRequest request);
 }
