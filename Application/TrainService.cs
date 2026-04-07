@@ -30,6 +30,18 @@ public class TrainService : ITrainService
         return response;
     }
 
+    public async Task<TrainResponse> GetTrainResponseByIdAsync(Guid id)
+    {
+        var train = await _trainRepo.GetTrainByIdAsync(id);
+        var response = new TrainResponse(
+            Id : train.Id, 
+            Model : train.Model, 
+            Number : train.Number
+        );
+
+        return response;
+    }
+
     public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)
     {
         return await _trainRepo.CreateTrainAsync(request);
