@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Domain;
 using Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Infrastructure.Repositories;
 
@@ -18,6 +19,16 @@ public class TrainRepository : ITrainRepository
     public async Task<List<Train>> GetTrainsAsync()
     {
         return await _db.Trains.ToListAsync();
+    }
+
+    public async Task<Train> GetTrainByIdAsync(Guid id)
+    {
+        var response = await _db.Trains
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (response is null) throw new RowNotInTableException();
+
+        return response;
     }
 
     public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)
