@@ -44,6 +44,24 @@ public class TrainService : ITrainService
 
     public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)
     {
-        return await _trainRepo.CreateTrainAsync(request);
+        var train = new Train
+        {
+            Id = Guid.NewGuid(),
+            Model = request.Model,
+            Number = request.Number
+        };
+
+        bool isCreated = await _trainRepo.CreateTrainAsync(train);
+
+        if (isCreated)
+        {
+            return new TrainResponse(
+                Id : train.Id,
+                Model : train.Model,
+                Number : train.Number
+            );
+        }
+
+        return null!;
     }
 }
