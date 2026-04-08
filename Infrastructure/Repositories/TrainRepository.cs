@@ -1,5 +1,4 @@
-﻿using Application.Dtos;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Domain;
 using Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -31,30 +30,20 @@ public class TrainRepository : ITrainRepository
         return response;
     }
 
-    public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)
+    public async Task<bool> CreateTrainAsync(Train train)
     {
-        var train = new Train
-        {
-            Id = Guid.NewGuid(),
-            Model = request.Model,
-            Number = request.Number
-        };
-
         try
         {
             await _db.AddAsync<Train>(train);
             await _db.SaveChangesAsync();
+            
+            return true;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error saving to database: {ex.Message}");
+            
+            return false;
         }
-
-        return new TrainResponse
-            (
-                Id : train.Id,
-                Model : request.Model,
-                Number : request.Number
-            );
     }
 }
