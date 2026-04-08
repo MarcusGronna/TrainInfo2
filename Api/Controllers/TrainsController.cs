@@ -1,6 +1,5 @@
 ﻿using Application.Dtos;
 using Application.Interfaces;
-using Infrastructure.DatabaseContext;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -10,12 +9,10 @@ namespace Api.Controllers;
 public class TrainsController : ControllerBase
 {
     private readonly ITrainService _trainService;
-    private readonly TrainContext _db;
 
-    public TrainsController(ITrainService trainService, TrainContext context)
+    public TrainsController(ITrainService trainService)
     {
         _trainService = trainService;
-        _db = context;
     }
 
     [HttpGet]
