@@ -38,4 +38,12 @@ public class TrainsController : ControllerBase
 
         return CreatedAtAction(nameof(GetTrains), response);
     }
+
+    [HttpPatch]
+    public async Task<ActionResult<TrainResponse>> UpdateTrainById(TrainRequest request, Guid id)
+    {
+        TrainResponse response = await _trainService.UpdateTrainByIdAsync(request, id);
+
+        return CreatedAtAction(nameof(GetTrainById), response);
+    }
 }
