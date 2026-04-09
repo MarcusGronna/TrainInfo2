@@ -7,5 +7,6 @@ namespace Application.Interfaces
         Task<List<TrainResponse>> GetTrainsResponseAsync();
         Task<TrainResponse> GetTrainResponseByIdAsync(Guid id);
         Task<TrainResponse> CreateTrainAsync(TrainRequest request);
+        Task<TrainResponse> UpdateTrainByIdAsync(TrainRequest request, Guid id);
     }
 }
