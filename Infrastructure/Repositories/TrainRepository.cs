@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Dtos;
+using Application.Interfaces;
 using Domain;
 using Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -45,5 +46,24 @@ public class TrainRepository : ITrainRepository
             
             return false;
         }
+    }
+
+    public async Task<Train> UpdateTrainByIdAsync(Train train, Guid id)
+    {
+        var trainToUpdate = await _db.Trains
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (trainToUpdate is null)
+        {
+            return null;
+        }
+
+        trainToUpdate.Model = trainToUpdate.Model == train.Model ? trainToUpdate.Model : train.Model;
+        trainToUpdate.Number = trainToUpdate.Number == train.Number ? trainToUpdate.Number : train.Model;
+
+        await _db.Trains.AddAsync(trainToUpdate);
+        await _db.SaveChangesAsync();
+
+        return trainToUpdate;
     }
 }
