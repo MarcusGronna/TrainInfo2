@@ -64,4 +64,33 @@ public class TrainService : ITrainService
 
         return null!;
     }
+
+    public async Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainRequest request, Guid id)
+    {
+        try
+        {
+            var train = new Train
+            {
+                Id = id,
+                Model = request.Model,
+                Number = request.Number
+            };
+
+            var updatedTrain = await _trainRepo.UpdateTrainByIdAsync(train, id);
+
+            var response = new TrainResponse(
+                Id: updatedTrain.Id,
+                Model: updatedTrain.Model,
+                Number: updatedTrain.Number
+            );
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Could not update train: {id}. Error: {ex.Message}");
+            
+            return null!;
+        }
+    }
 }
