@@ -1,12 +1,11 @@
 ﻿using Application.Dtos;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public interface ITrainService
 {
-    public interface ITrainService
-    {
-        Task<List<TrainResponse>> GetTrainsResponseAsync();
-        Task<TrainResponse> GetTrainResponseByIdAsync(Guid id);
-        Task<TrainResponse> CreateTrainAsync(TrainRequest request);
-        Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainRequest request, Guid id);
-    }
+    Task<List<TrainResponse>> GetTrainsResponseAsync();
+    Task<TrainResponse> GetTrainResponseByIdAsync(Guid id);
+    Task<TrainResponse> CreateTrainAsync(TrainRequest request);
+    Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainUpdateRequest request, Guid id);
 }

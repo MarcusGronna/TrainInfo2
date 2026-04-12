@@ -48,22 +48,15 @@ public class TrainRepository : ITrainRepository
         }
     }
 
-    public async Task<Train> UpdateTrainByIdAsync(Train train, Guid id)
+    public async Task UpdateTrainByIdAsync(Train train, Guid id)
     {
-        var trainToUpdate = await _db.Trains
-            .FirstOrDefaultAsync(t => t.Id == id);
-
-        if (trainToUpdate is null)
-        {
-            return null;
+        try
+        {await _db.Trains.AddAsync(train);
+            await _db.SaveChangesAsync();
         }
-
-        trainToUpdate.Model = trainToUpdate.Model == train.Model ? trainToUpdate.Model : train.Model;
-        trainToUpdate.Number = trainToUpdate.Number == train.Number ? trainToUpdate.Number : train.Model;
-
-        await _db.Trains.AddAsync(trainToUpdate);
-        await _db.SaveChangesAsync();
-
-        return trainToUpdate;
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving to database: {ex.Message}");
+        }
     }
 }

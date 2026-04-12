@@ -65,26 +65,29 @@ public class TrainService : ITrainService
         return null!;
     }
 
-    public async Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainRequest request, Guid id)
+    public async Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainUpdateRequest request, Guid id)
     {
         try
         {
-            var train = new Train
+            var train = await _trainRepo.GetTrainByIdAsync(id);
+            
+            if (request.Model is not null)
             {
-                Id = id,
-                Model = request.Model,
-                Number = request.Number
-            };
+                train.SetModel(request.Model);
+            }
 
-            var updatedTrain = await _trainRepo.UpdateTrainByIdAsync(train, id);
+            if (request.Number is not null)
+            {
+                train.SetNumber(request.Number);
+            }
+    
+            await _trainRepo.UpdateTrainByIdAsync(train, id);
 
-            var response = new TrainResponse(
-                Id: updatedTrain.Id,
-                Model: updatedTrain.Model,
-                Number: updatedTrain.Number
+            return new TrainResponse(
+                Id : train.Id,
+                Model : train.Model,
+                Number : train.Number
             );
-
-            return response;
         }
         catch (Exception ex)
         {

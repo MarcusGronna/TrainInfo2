@@ -9,5 +9,5 @@ public interface ITrainRepository
 
     Task<Train> GetTrainByIdAsync(Guid id);
     Task<bool> CreateTrainAsync(Train train);
-    Task<Train> UpdateTrainByIdAsync(Train train, Guid id);
+    Task UpdateTrainByIdAsync(Train train, Guid id);
 }
