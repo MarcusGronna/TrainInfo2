@@ -51,7 +51,16 @@ public class TrainRepository : ITrainRepository
     public async Task UpdateTrainByIdAsync(Train train, Guid id)
     {
         try
-        {await _db.Trains.AddAsync(train);
+        {
+            var currentTrain = await _db.Trains.FindAsync(id);
+
+            if (currentTrain is null)
+            {
+                throw new RowNotInTableException();
+            }
+
+            _db.Entry(currentTrain).CurrentValues.SetValues(train);
+
             await _db.SaveChangesAsync();
         }
         catch (Exception ex)
