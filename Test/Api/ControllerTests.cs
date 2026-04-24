@@ -1,5 +1,7 @@
 ﻿using Api.Controllers;
+using Application.Dtos;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Data;
@@ -18,7 +20,7 @@ public class ControllerTests
     }
 
     [Fact]
-    public async Task ShouldReturn404_WhenResourceNotFound()
+    public async Task GetTrainById_ShouldReturn404_WhenResourceNotFound()
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -31,5 +33,38 @@ public class ControllerTests
 
         // Assert
         Assert.IsType<NotFoundResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task CreateTrain_ShouldReturn400_WhenIncorrectDataIsRecieved()
+    {
+        // Arrange
+        var request = new TrainRequest(string.Empty, string.Empty);
+        _serviceMock
+            .Setup(s => s.CreateTrainAsync(It.IsAny<TrainRequest>()))
+            .ThrowsAsync(new ArgumentException());
+
+        // Act
+        var result = await _controller.CreateTrain(request);
+
+        // Assert
+        Assert.IsType<BadRequestResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task Update_ShouldReturn400_WhenIncorrectDataIsRecieved()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var request = new TrainUpdateRequest(string.Empty, string.Empty);
+        _serviceMock
+            .Setup(s => s.UpdateTrainResponseByIdAsync(It.IsAny<TrainUpdateRequest>(), id))
+            .ThrowsAsync(new ArgumentException());
+
+        // Act
+        var result = await _controller.Update(request, id);
+
+        // Assert
+        Assert.IsType<BadRequestResult>(result);
     }
 }
