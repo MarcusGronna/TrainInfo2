@@ -42,16 +42,30 @@ public class TrainsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TrainResponse>> CreateTrain(TrainRequest request)
     {
-        TrainResponse response = await _trainService.CreateTrainAsync(request); 
+        try
+        {
+            TrainResponse response = await _trainService.CreateTrainAsync(request);
 
-        return CreatedAtAction(nameof(GetTrainById), new { id = response.Id }, response);
+            return CreatedAtAction(nameof(GetTrainById), new { id = response.Id }, response);
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest();
+        }
     }
 
     [HttpPatch("{id}")]
-    public async Task<IResult> Update(TrainUpdateRequest request, Guid id)
+    public async Task<ActionResult> Update(TrainUpdateRequest request, Guid id)
     {
-        TrainResponse response = await _trainService.UpdateTrainResponseByIdAsync(request, id);
+        try
+        {
+            TrainResponse response = await _trainService.UpdateTrainResponseByIdAsync(request, id);
 
-        return Results.Ok();
+            return Ok();
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest();
+        }
     }
 }
