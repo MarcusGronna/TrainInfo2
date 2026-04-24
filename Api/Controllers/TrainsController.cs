@@ -1,6 +1,7 @@
 ﻿using Application.Dtos;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Api.Controllers;
 
@@ -26,9 +27,16 @@ public class TrainsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<TrainResponse>> GetTrainById(Guid id)
     {
-        var response = await _trainService.GetTrainResponseByIdAsync(id);
+        try
+        {
+            var response = await _trainService.GetTrainResponseByIdAsync(id);
 
-        return Ok(response);
+            return Ok(response);
+        }
+        catch (RowNotInTableException)
+        {
+            return NotFound();
+        }
     }
 
     [HttpPost]
@@ -36,7 +44,7 @@ public class TrainsController : ControllerBase
     {
         TrainResponse response = await _trainService.CreateTrainAsync(request); 
 
-        return CreatedAtAction(nameof(GetTrains), response);
+        return CreatedAtAction(nameof(GetTrainById), new { id = response.Id }, response);
     }
 
     [HttpPatch("{id}")]
