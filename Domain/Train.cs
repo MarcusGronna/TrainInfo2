@@ -2,9 +2,9 @@
 
 public class Train
 {
-    public Guid Id { get; set; }
-    public string Number { get; set; }
-    public string Model { get; set; }
+    public required Guid Id { get; set; }
+    public required string Number { get; set; }
+    public required string Model { get; set; }
 
     public Train()
     {
