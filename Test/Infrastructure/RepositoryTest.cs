@@ -4,7 +4,7 @@ using Moq;
 
 namespace Tests.Infrastructure
 {
-    public class InfrastructureTests
+    public class RepositoryTest
     {
         [Fact]
         public async Task GetTrainByIdAsync_IsCalled_ShouldReturnTrainNumber6066()
