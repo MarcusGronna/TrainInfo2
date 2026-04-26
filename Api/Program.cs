@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<ITrainRepository,TrainRepository>();
 builder.Services.AddScoped<ITrainService, TrainService>();
-builder.Services.AddDbContext<TrainContext>();
+builder.Services.AddDbContext<TrainDbContext>();
 
 var app = builder.Build();
 

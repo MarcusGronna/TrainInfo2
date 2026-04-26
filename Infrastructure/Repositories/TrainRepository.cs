@@ -1,5 +1,4 @@
-﻿using Application.Dtos;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Domain;
 using Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +8,9 @@ namespace Infrastructure.Repositories;
 
 public class TrainRepository : ITrainRepository
 {
-    private TrainContext _db;
+    private TrainDbContext _db;
 
-    public TrainRepository(TrainContext db)
+    public TrainRepository(TrainDbContext db)
     {
         _db = db;
     }

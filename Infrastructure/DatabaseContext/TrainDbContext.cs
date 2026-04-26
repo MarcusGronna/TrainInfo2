@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DatabaseContext;
 
-public class TrainContext : DbContext
+public class TrainDbContext : DbContext
 {
     public DbSet<Train> Trains { get; set; }
 
     public string DbPath { get; }
 
-    public TrainContext()
+    public TrainDbContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
