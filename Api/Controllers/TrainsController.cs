@@ -55,7 +55,7 @@ public class TrainsController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<ActionResult> Update(TrainUpdateRequest request, Guid id)
+    public async Task<ActionResult> UpdateTrain(TrainUpdateRequest request, Guid id)
     {
         try
         {
