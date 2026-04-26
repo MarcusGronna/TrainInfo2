@@ -1,5 +1,4 @@
-﻿using Application.Dtos;
-using Domain;
+﻿using Domain;
 
 namespace Application.Interfaces;
 
@@ -9,5 +8,5 @@ public interface ITrainRepository
 
     Task<Train> GetTrainByIdAsync(Guid id);
     Task<bool> CreateTrainAsync(Train train);
-    Task UpdateTrainByIdAsync(Train train, Guid id);
+    Task<bool> UpdateTrainByIdAsync(Train train, Guid id);
 }

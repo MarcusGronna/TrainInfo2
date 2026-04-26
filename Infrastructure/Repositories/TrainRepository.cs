@@ -48,7 +48,7 @@ public class TrainRepository : ITrainRepository
         }
     }
 
-    public async Task UpdateTrainByIdAsync(Train train, Guid id)
+    public async Task<bool> UpdateTrainByIdAsync(Train train, Guid id)
     {
         try
         {
@@ -62,10 +62,14 @@ public class TrainRepository : ITrainRepository
             _db.Entry(currentTrain).CurrentValues.SetValues(train);
 
             await _db.SaveChangesAsync();
+
+            return true;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error saving to database: {ex.Message}");
+
+            return false;
         }
     }
 }
