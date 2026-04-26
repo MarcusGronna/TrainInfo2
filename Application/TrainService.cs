@@ -34,9 +34,9 @@ public class TrainService : ITrainService
     {
         var train = await _trainRepo.GetTrainByIdAsync(id);
         var response = new TrainResponse(
-            Id : train.Id, 
-            Model : train.Model, 
-            Number : train.Number
+            Id: train.Id,
+            Model: train.Model,
+            Number: train.Number
         );
 
         return response;
@@ -56,9 +56,9 @@ public class TrainService : ITrainService
         if (isCreated)
         {
             return new TrainResponse(
-                Id : train.Id,
-                Model : train.Model,
-                Number : train.Number
+                Id: train.Id,
+                Model: train.Model,
+                Number: train.Number
             );
         }
 
@@ -67,33 +67,31 @@ public class TrainService : ITrainService
 
     public async Task<TrainResponse> UpdateTrainByIdAsync(TrainUpdateRequest request, Guid id)
     {
-        try
+        var train = await _trainRepo.GetTrainByIdAsync(id);
+
+        if (request.Model is not null)
         {
-            var train = await _trainRepo.GetTrainByIdAsync(id);
-            
-            if (request.Model is not null)
-            {
-                train.SetModel(request.Model);
-            }
+            train.SetModel(request.Model);
+        }
 
-            if (request.Number is not null)
-            {
-                train.SetNumber(request.Number);
-            }
-    
-            await _trainRepo.UpdateTrainByIdAsync(train, id);
+        if (request.Number is not null)
+        {
+            train.SetNumber(request.Number);
+        }
 
+        bool updated = await _trainRepo.UpdateTrainByIdAsync(train, id);
+
+        if (updated)
+        {
             return new TrainResponse(
-                Id : train.Id,
-                Model : train.Model,
-                Number : train.Number
+                Id: train.Id,
+                Model: train.Model,
+                Number: train.Number
             );
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine($"Could not update train: {id}. Error: {ex.Message}");
-            
-            return null!;
+            throw new Exception("Failed to update train.");
         }
     }
 }

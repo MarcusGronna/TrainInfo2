@@ -7,5 +7,5 @@ public interface ITrainService
     Task<List<TrainResponse>> GetTrainsResponseAsync();
     Task<TrainResponse> GetTrainResponseByIdAsync(Guid id);
     Task<TrainResponse> CreateTrainAsync(TrainRequest request);
-    Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainUpdateRequest request, Guid id);
+    Task<TrainResponse> UpdateTrainByIdAsync(TrainUpdateRequest request, Guid id);
 }
