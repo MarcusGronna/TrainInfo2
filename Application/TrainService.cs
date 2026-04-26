@@ -65,7 +65,7 @@ public class TrainService : ITrainService
         return null!;
     }
 
-    public async Task<TrainResponse> UpdateTrainResponseByIdAsync(TrainUpdateRequest request, Guid id)
+    public async Task<TrainResponse> UpdateTrainByIdAsync(TrainUpdateRequest request, Guid id)
     {
         try
         {
