@@ -9,11 +9,13 @@ namespace Api.Controllers;
 [ApiController]
 public class TrainsController : ControllerBase
 {
+    private readonly ILogger<TrainsController> _logger;
     private readonly ITrainService _trainService;
 
-    public TrainsController(ITrainService trainService)
+    public TrainsController(ITrainService trainService, ILogger<TrainsController> logger)
     {
         _trainService = trainService;
+        _logger = logger;
     }
 
     [HttpGet]
