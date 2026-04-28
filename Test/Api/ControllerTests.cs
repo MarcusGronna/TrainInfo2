@@ -1,7 +1,6 @@
 ﻿using Api.Controllers;
 using Application.Dtos;
 using Application.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Data;
@@ -58,11 +57,11 @@ public class ControllerTests
         var id = Guid.NewGuid();
         var request = new TrainUpdateRequest(string.Empty, string.Empty);
         _serviceMock
-            .Setup(s => s.UpdateTrainResponseByIdAsync(It.IsAny<TrainUpdateRequest>(), id))
+            .Setup(s => s.UpdateTrainByIdAsync(It.IsAny<TrainUpdateRequest>(), id))
             .ThrowsAsync(new ArgumentException());
 
         // Act
-        var result = await _controller.Update(request, id);
+        var result = await _controller.UpdateTrain(request, id);
 
         // Assert
         Assert.IsType<BadRequestResult>(result);
