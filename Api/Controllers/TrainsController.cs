@@ -66,7 +66,7 @@ public class TrainsController : ControllerBase
     {
         try
         {
-            TrainResponse response = await _trainService.UpdateTrainResponseByIdAsync(request, id);
+            TrainResponse response = await _trainService.UpdateTrainByIdAsync(request, id);
 
             return Ok();
         }
