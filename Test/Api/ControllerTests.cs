@@ -10,12 +10,39 @@ namespace Tests.Api;
 public class ControllerTests
 {
     private readonly Mock<ITrainService> _serviceMock;
+    private readonly HttpClient client = new HttpClient();
     private readonly TrainsController _controller;
 
     public ControllerTests()
     {
         _serviceMock = new Mock<ITrainService>();
         _controller = new TrainsController(_serviceMock.Object);
+    }
+
+    [Fact]
+    public async Task GetTrains_ShouldReturnTrains_WhenNavigatedToEndpoint()
+    {
+        // Arrange
+        Guid id = Guid.NewGuid();
+        List<TrainResponse> t = new List<TrainResponse>{
+            new TrainResponse
+        (
+            Id : id,
+            Model : "Rc6",
+            Number : "6066"
+        ) };
+
+        _serviceMock
+            .Setup(s => s.GetTrainsResponseAsync())
+            .ReturnsAsync(t);
+
+        // Act
+        var result = await _controller.GetTrains();
+        var trains = result.Result as OkObjectResult;
+
+        // Assert
+        Assert.Equal(t, trains.Value);
+
     }
 
     [Fact]
