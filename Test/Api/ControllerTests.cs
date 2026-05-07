@@ -20,7 +20,7 @@ public class ControllerTests
     }
 
     [Fact]
-    public async Task GetTrains_ShouldReturnTrains_WhenTrainsExists()
+    public async Task GetTrains_ShouldReturnTrains_WhenTrainsExist()
     {
         // Arrange
         Guid id = Guid.NewGuid();
