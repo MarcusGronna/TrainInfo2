@@ -62,7 +62,7 @@ public class ControllerTests
     }
 
     [Fact]
-    public async Task CreateTrain_ShouldReturn400_WhenIncorrectDataIsRecieved()
+    public async Task CreateTrain_ShouldReturn400_WhenIncorrectDataIsReceived()
     {
         // Arrange
         var request = new TrainRequest(string.Empty, string.Empty);
@@ -78,7 +78,7 @@ public class ControllerTests
     }
 
     [Fact]
-    public async Task Update_ShouldReturn400_WhenIncorrectDataIsRecieved()
+    public async Task Update_ShouldReturn400_WhenIncorrectDataIsReceived()
     {
         // Arrange
         var id = Guid.NewGuid();
