@@ -20,11 +20,11 @@ public class ControllerTests
     }
 
     [Fact]
-    public async Task GetTrains_ShouldReturnTrains_WhenNavigatedToEndpoint()
+    public async Task GetTrains_ShouldReturnTrains_WhenTrainsExists()
     {
         // Arrange
         Guid id = Guid.NewGuid();
-        List<TrainResponse> t = new List<TrainResponse>{
+        List<TrainResponse> expectedTrain = new List<TrainResponse>{
             new TrainResponse
         (
             Id : id,
@@ -34,14 +34,14 @@ public class ControllerTests
 
         _serviceMock
             .Setup(s => s.GetTrainsResponseAsync())
-            .ReturnsAsync(t);
+            .ReturnsAsync(expectedTrain);
 
         // Act
         var result = await _controller.GetTrains();
-        var trains = result.Result as OkObjectResult;
+        var okResult = Assert.IsType<OkObjectResult>(result.Result);
 
         // Assert
-        Assert.Equal(t, trains.Value);
+        Assert.Equal(expectedTrain, okResult.Value);
 
     }
 
