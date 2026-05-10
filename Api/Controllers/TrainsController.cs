@@ -34,7 +34,7 @@ public class TrainsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<TrainResponse>> GetTrainById(Guid id)
     {
-        var response = _trainService.GetTrainByIdAsync(id);
+        var response = await _trainService.GetTrainByIdAsync(id);
 
         if (response is null)
         {
