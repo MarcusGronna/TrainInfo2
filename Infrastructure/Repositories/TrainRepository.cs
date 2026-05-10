@@ -20,14 +20,10 @@ public class TrainRepository : ITrainRepository
         return await _db.Trains.ToListAsync();
     }
 
-    public async Task<Train> GetTrainByIdAsync(Guid id)
+    public async Task<Train?> GetTrainByIdAsync(Guid id)
     {
-        var response = await _db.Trains
+        return await _db.Trains
             .FirstOrDefaultAsync(t => t.Id == id);
-
-        if (response is null) throw new RowNotInTableException();
-
-        return response;
     }
 
     public async Task<bool> CreateTrainAsync(Train train)
@@ -36,13 +32,13 @@ public class TrainRepository : ITrainRepository
         {
             await _db.AddAsync<Train>(train);
             await _db.SaveChangesAsync();
-            
+
             return true;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error saving to database: {ex.Message}");
-            
+
             return false;
         }
     }

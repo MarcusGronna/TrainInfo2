@@ -34,16 +34,14 @@ public class TrainsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<TrainResponse>> GetTrainById(Guid id)
     {
-        try
-        {
-            var response = await _trainService.GetTrainByIdAsync(id);
+        var response = _trainService.GetTrainByIdAsync(id);
 
-            return Ok(response);
-        }
-        catch (RowNotInTableException)
+        if (response is null)
         {
             return NotFound();
         }
+
+        return Ok(response);
     }
 
     [HttpPost]
