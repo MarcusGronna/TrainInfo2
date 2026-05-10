@@ -13,7 +13,7 @@ public class TrainService : ITrainService
         _trainRepo = trainRepo;
     }
 
-    public async Task<List<TrainResponse>> GetTrainsResponseAsync()
+    public async Task<List<TrainResponse>> GetTrainsAsync()
     {
         List<Train> trains = await _trainRepo.GetTrainsAsync();
         List<TrainResponse> response = new List<TrainResponse>();
@@ -30,7 +30,7 @@ public class TrainService : ITrainService
         return response;
     }
 
-    public async Task<TrainResponse> GetTrainResponseByIdAsync(Guid id)
+    public async Task<TrainResponse> GetTrainByIdAsync(Guid id)
     {
         var train = await _trainRepo.GetTrainByIdAsync(id);
         var response = new TrainResponse(

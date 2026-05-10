@@ -34,7 +34,7 @@ public class ControllerTests
         ) };
 
         _serviceMock
-            .Setup(s => s.GetTrainsResponseAsync())
+            .Setup(s => s.GetTrainsAsync())
             .ReturnsAsync(expectedTrain);
 
         // Act
@@ -52,7 +52,7 @@ public class ControllerTests
         // Arrange
         var id = Guid.NewGuid();
         _serviceMock
-            .Setup(s => s.GetTrainResponseByIdAsync(id))
+            .Setup(s => s.GetTrainByIdAsync(id))
             .ThrowsAsync(new RowNotInTableException());
 
         // Act

@@ -26,7 +26,7 @@ public class TrainsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<TrainResponse>>> GetTrains()
     {
-        List<TrainResponse> response = await _trainService.GetTrainsResponseAsync();
+        List<TrainResponse> response = await _trainService.GetTrainsAsync();
 
         return Ok(response);
     }
@@ -36,7 +36,7 @@ public class TrainsController : ControllerBase
     {
         try
         {
-            var response = await _trainService.GetTrainResponseByIdAsync(id);
+            var response = await _trainService.GetTrainByIdAsync(id);
 
             return Ok(response);
         }
