@@ -1,7 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace Api.Controllers;
 
@@ -11,11 +10,6 @@ public class TrainsController : ControllerBase
 {
     private readonly ILogger<TrainsController>? _logger;
     private readonly ITrainService _trainService;
-
-    public TrainsController(ITrainService trainService)
-    {
-        _trainService = trainService;
-    }
 
     public TrainsController(ITrainService trainService, ILogger<TrainsController> logger)
     {
