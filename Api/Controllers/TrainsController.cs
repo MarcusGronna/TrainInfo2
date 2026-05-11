@@ -41,16 +41,14 @@ public class TrainsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TrainResponse>> CreateTrain(TrainRequest request)
     {
-        try
-        {
-            TrainResponse response = await _trainService.CreateTrainAsync(request);
+        var response = await _trainService.CreateTrainAsync(request);
 
-            return CreatedAtAction(nameof(GetTrainById), new { id = response.Id }, response);
-        }
-        catch (ArgumentException)
+        if (response is null)
         {
             return BadRequest();
         }
+
+        return CreatedAtAction(nameof(GetTrainById), new { id = response.Id }, request);
     }
 
     [HttpPatch("{id}")]
