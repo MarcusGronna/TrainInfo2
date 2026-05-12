@@ -43,7 +43,6 @@ public class ControllerTests
 
         // Assert
         Assert.Equal(expectedTrain, okResult.Value);
-
     }
 
     [Fact]
