@@ -68,8 +68,7 @@ public class ControllerTests
         // Arrange
         var request = new TrainRequest(string.Empty, string.Empty);
         _serviceMock
-            .Setup(s => s.CreateTrainAsync(It.IsAny<TrainRequest>()))
-            .ThrowsAsync(new ArgumentException());
+            .Setup(s => s.CreateTrainAsync(It.IsAny<TrainRequest>()));
 
         // Act
         var result = await _controller.CreateTrain(request);
