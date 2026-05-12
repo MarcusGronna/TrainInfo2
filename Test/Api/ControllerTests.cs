@@ -3,7 +3,6 @@ using Application.Dtos;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Data;
 
 namespace Tests.Api;
 
@@ -15,8 +14,9 @@ public class ControllerTests
 
     public ControllerTests()
     {
+        var nullLogger = Microsoft.Extensions.Logging.Abstractions.NullLogger<TrainsController>.Instance;
         _serviceMock = new Mock<ITrainService>();
-        _controller = new TrainsController(_serviceMock.Object);
+        _controller = new TrainsController(_serviceMock.Object, nullLogger);
     }
 
     // TODO - Fix this test so it test the right thing
