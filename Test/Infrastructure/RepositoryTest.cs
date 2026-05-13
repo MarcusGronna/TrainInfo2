@@ -6,6 +6,7 @@ namespace Tests.Infrastructure
 {
     public class RepositoryTest
     {
+        // TODO - Replace the mocking of the repository with real test of repository
         [Fact]
         public async Task GetTrainByIdAsync_IsCalled_ShouldReturnTrainNumber6066()
         {
