@@ -26,7 +26,6 @@ namespace Tests.Infrastructure
             // Act
             var train = await repo.GetTrainByIdAsync(id);
 
-
             // Assert
             Assert.Equal("6066", train.Number);
         }
