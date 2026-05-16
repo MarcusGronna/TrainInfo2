@@ -54,15 +54,13 @@ public class TrainsController : ControllerBase
     [HttpPatch("{id}")]
     public async Task<ActionResult> UpdateTrain(TrainUpdateRequest request, Guid id)
     {
-        try
-        {
-            TrainResponse response = await _trainService.UpdateTrainByIdAsync(request, id);
+        var response = await _trainService.UpdateTrainByIdAsync(request, id);
 
-            return Ok();
-        }
-        catch (ArgumentException)
+        if (response is null)
         {
             return BadRequest();
         }
+
+        return NoContent();
     }
 }
