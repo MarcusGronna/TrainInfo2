@@ -83,8 +83,7 @@ public class ControllerTests
         var id = Guid.NewGuid();
         var request = new TrainUpdateRequest(string.Empty, string.Empty);
         _serviceMock
-            .Setup(s => s.UpdateTrainByIdAsync(It.IsAny<TrainUpdateRequest>(), id))
-            .ThrowsAsync(new ArgumentException());
+            .Setup(s => s.UpdateTrainByIdAsync(It.IsAny<TrainUpdateRequest>(), id));
 
         // Act
         var result = await _controller.UpdateTrain(request, id);
