@@ -46,7 +46,7 @@ public class TrainService : ITrainService
         );
     }
 
-    public async Task<TrainResponse> CreateTrainAsync(TrainRequest request)
+    public async Task<TrainResponse?> CreateTrainAsync(TrainRequest request)
     {
         var train = new Train
         {
@@ -66,7 +66,7 @@ public class TrainService : ITrainService
             );
         }
 
-        return null!;
+        return null;
     }
 
     public async Task<TrainResponse?> UpdateTrainByIdAsync(TrainUpdateRequest request, Guid id)
