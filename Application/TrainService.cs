@@ -69,14 +69,11 @@ public class TrainService : ITrainService
         return null!;
     }
 
-    public async Task<TrainResponse> UpdateTrainByIdAsync(TrainUpdateRequest request, Guid id)
+    public async Task<TrainResponse?> UpdateTrainByIdAsync(TrainUpdateRequest request, Guid id)
     {
         var train = await _trainRepo.GetTrainByIdAsync(id);
 
-        if (request.Model is not null)
-        {
-            train.SetModel(request.Model);
-        }
+        if (train is null) return null;
 
         if (request.Number is not null)
         {
