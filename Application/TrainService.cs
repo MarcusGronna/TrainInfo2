@@ -75,10 +75,9 @@ public class TrainService : ITrainService
 
         if (train is null) return null;
 
-        if (request.Number is not null)
-        {
-            train.SetNumber(request.Number);
-        }
+        if (request.Model is not null) train.SetModel(request.Model);
+
+        if (request.Number is not null) train.SetNumber(request.Number);
 
         bool updated = await _trainRepo.UpdateTrainByIdAsync(train, id);
 
@@ -90,9 +89,6 @@ public class TrainService : ITrainService
                 Number: train.Number
             );
         }
-        else
-        {
-            throw new Exception("Failed to update train.");
-        }
+        else return null;
     }
 }
