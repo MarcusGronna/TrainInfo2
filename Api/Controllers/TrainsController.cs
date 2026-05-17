@@ -56,10 +56,7 @@ public class TrainsController : ControllerBase
     {
         var response = await _trainService.UpdateTrainByIdAsync(request, id);
 
-        if (response is null)
-        {
-            return BadRequest();
-        }
+        if (response is null) return BadRequest();
 
         return NoContent();
     }
